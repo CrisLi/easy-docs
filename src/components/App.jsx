@@ -2,7 +2,7 @@ import React from 'react';
 
 const App = () => (
   <div>
-    App page
+    App page!!!
   </div>
 );
 

@@ -1,3 +1,7 @@
-const webpackConfig = require('./webpack/webpack.config.dev');
+const config = require('config');
 
-module.exports = webpackConfig;
+if (config.NODE_ENV === 'production') {
+  module.exports = require('./webpack/webpack.config.pro');  // eslint-disable-line
+} else {
+  module.exports = require('./webpack/webpack.config.dev');  // eslint-disable-line
+}

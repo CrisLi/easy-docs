@@ -37,6 +37,30 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader?modules', 'postcss-loader?config=webpack/postcss.config.js']
         })
+      },
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'media/[name].[hash:8].[ext]',
+        },
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.css$/,
+          /\.json$/,
+          /\.bmp$/,
+          /\.gif$/,
+          /\.jpe?g$/,
+          /\.png$/
+        ]
+      },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'media/[name].[hash:8].[ext]'
+        }
       }
     ]
   },

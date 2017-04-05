@@ -1,19 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import createStore from './createStore';
 import './app.css';
 import App from './components/App';
 
+const store = createStore();
+
 if (process.env.NODE_ENV === 'production') {
   ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById('app')
   );
 } else {
   const render = (Component) => {
     ReactDOM.render(
       <AppContainer>
-        <Component />
+        <Provider store={store}>
+          <Component />
+        </Provider>
       </AppContainer>,
       document.getElementById('app')
     );

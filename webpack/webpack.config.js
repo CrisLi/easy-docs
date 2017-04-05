@@ -1,6 +1,8 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { appPath, distPath, publicPath } = require('./paths');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   entry: [
     'react-hot-loader/patch',
@@ -10,7 +12,7 @@ module.exports = {
   ],
   output: {
     path: distPath,
-    filename: 'js/[name].[hash:8].js',
+    filename: 'static/js/[name].[hash:8].js',
     publicPath
   },
   resolve: {
@@ -35,13 +37,22 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader?modules', 'postcss-loader?config=webpack/postcss.config.js']
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                minimize: isProduction
+              }
+            },
+            'postcss-loader?config=webpack/postcss.config.js'
+          ]
         })
       },
       {
         loader: 'file-loader',
         options: {
-          name: 'media/[name].[hash:8].[ext]',
+          name: 'static/media/[name].[hash:8].[ext]',
         },
         exclude: [
           /\.html$/,
@@ -59,7 +70,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'media/[name].[hash:8].[ext]'
+          name: 'static/media/[name].[hash:8].[ext]'
         }
       }
     ]

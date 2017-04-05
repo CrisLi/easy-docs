@@ -7,8 +7,6 @@ const { appPath, distPath, publicPath, appHtml, favicon, stylesPath } = require(
 
 const { port } = config.devServer;
 
-console.log(config.title);
-
 module.exports = Object.assign({}, webpackConfig, {
   devtool: 'eval-source-map',
   entry: [

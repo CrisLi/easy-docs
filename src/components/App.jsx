@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import Home from './Home';
 import About from './About';
+import Login from './Login';
 import { app } from '../actions';
 import logo from './logo.png';
 import './spinner.css';
@@ -12,10 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.toggleSpinner = this.toggleSpinner.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.props);
   }
 
   toggleSpinner() {
@@ -41,10 +39,16 @@ class App extends Component {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
+              {
+                this.props.auth.token ?
+                  (<li><Link to="/login">Logout</Link></li>) :
+                  (<li><Link to="/login">Login</Link></li>)
+              }
             </ul>
             <hr />
-            <Route exact path="/" component={Home} />
+            <PrivateRoute exact path="/" component={Home} auth={this.props.auth} />
             <Route path="/about" component={About} />
+            <Route path="/login" component={Login} />
           </div>
         </Router>
       </div>
@@ -52,6 +56,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => (state.app);
+const mapStateToProps = state => ({
+  ...state.app,
+  auth: state.auth
+});
 
 export default connect(mapStateToProps, app)(App);

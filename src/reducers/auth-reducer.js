@@ -3,7 +3,12 @@ export default function(state = {}, action) {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        token: action.payload
+        token: action.payload.token
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        token: null
       };
     default:
       return state;

@@ -11,7 +11,7 @@ const render = auth => component => (
 );
 
 const PrivateRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={render(rest.auth)(component)} />
+  <Route {...rest} render={render(rest.auth || {})(component)} />
 );
 
 export default PrivateRoute;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isAuthenticated } from '../lib/auth';
 
-const render = auth => component => (
+const render = component => (
   (props) => {
-    if (auth.token) {
+    if (isAuthenticated()) {
       return React.createElement(component, props);
     }
     return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
@@ -11,7 +12,7 @@ const render = auth => component => (
 );
 
 const PrivateRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={render(rest.auth || {})(component)} />
+  <Route {...rest} render={render(component)} />
 );
 
 export default PrivateRoute;

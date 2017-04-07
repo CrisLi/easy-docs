@@ -1,3 +1,6 @@
 {
-  "title": "My App"
+  "title": "My App",
+  "auth": {
+    "localTokenKey": "x-app-token"
+  }
 }

@@ -16,7 +16,10 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.logout();
+    const { isAuthenticated, actions: { logout } } = this.props;
+    if (isAuthenticated) {
+      logout();
+    }
   }
 
   onChange({ target: { name, value } }) {
@@ -31,11 +34,9 @@ class Login extends Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-
-    if (this.props.token) {
+    if (this.props.isAuthenticated) {
       return (
-        <Redirect to={from} />
+        <Redirect to="/" />
       );
     }
 

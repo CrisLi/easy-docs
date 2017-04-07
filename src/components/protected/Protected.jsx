@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route, NavLink } from 'react-router-dom';
 import { Container, Menu, Icon, Sidebar, Segment, Dropdown } from 'semantic-ui-react';
 import Home from './Home';
 import Document from './Document';
 import About from './About';
+import { auth } from '../../actions';
 
-const Header = ({ toggleSidebar }) => (
+const Header = ({ toggleSidebar, logout }) => (
   <Menu fixed="top" inverted>
     <Container fluid>
       <Menu.Item name="content" onClick={toggleSidebar}>
@@ -16,7 +18,7 @@ const Header = ({ toggleSidebar }) => (
           <Dropdown item text="Admin">
             <Dropdown.Menu>
               <Dropdown.Item>About</Dropdown.Item>
-              <Dropdown.Item>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Menu>
@@ -43,14 +45,16 @@ class Protected extends Component {
 
   render() {
     const { showSidebar: show } = this.state;
+    const { logout } = this.props.actions;
     return (
       <div>
-        <Header toggleSidebar={this.toggleSidebar} />
+        <Header toggleSidebar={this.toggleSidebar} logout={logout} />
         <Sidebar.Pushable>
           <Sidebar as={Menu} inverted animation="push" width="thin" visible={show} icon vertical>
             <Menu.Item>
               <Icon name="content" />
             </Menu.Item>
+            <Menu.Item as={NavLink} to="/" exact>Home</Menu.Item>
             <Menu.Item as={NavLink} to="/document">Document</Menu.Item>
             <Menu.Item as={NavLink} to="/about">About</Menu.Item>
           </Sidebar>
@@ -76,4 +80,6 @@ const Main = () => (
   </div>
 );
 
-export default Protected;
+const mapStateToProps = state => (state.auth);
+
+export default connect(mapStateToProps, auth)(Protected);

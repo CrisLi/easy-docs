@@ -1,14 +1,14 @@
-export default function(state = {}, action) {
+export default function(state = { isAuthenticated: false }, action) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        token: action.payload.token
+        isAuthenticated: true
       };
     case 'LOGOUT':
       return {
         ...state,
-        token: null
+        isAuthenticated: false
       };
     default:
       return state;

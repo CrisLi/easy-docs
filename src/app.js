@@ -4,8 +4,13 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import createStore from './createStore';
 import App from './components/App';
+import { isAuthenticated } from './lib/auth';
 
-const store = createStore();
+const store = createStore({
+  auth: {
+    isAuthenticated: isAuthenticated()
+  }
+});
 
 if (process.env.NODE_ENV === 'production') {
   ReactDOM.render(

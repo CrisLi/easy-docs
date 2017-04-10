@@ -1,4 +1,3 @@
-import { setToken, deleteToken } from '../lib/auth';
 
 export default function(state = { isAuthenticated: false }, action) {
   switch (action.type) {
@@ -7,7 +6,6 @@ export default function(state = { isAuthenticated: false }, action) {
         isProcessing: true
       };
     case 'LOGIN_SUCCESS':
-      setToken(action.payload.id_token);
       return {
         ...state,
         isAuthenticated: true,
@@ -23,7 +21,6 @@ export default function(state = { isAuthenticated: false }, action) {
         }
       };
     case 'LOGOUT':
-      deleteToken();
       return {
         ...state,
         isAuthenticated: false

@@ -28,3 +28,17 @@ export const isAuthenticated = () => {
   // check token valid
   return !!token;
 };
+
+export const authMiddleware = () => next => (action) => {
+  switch (action.type) {
+    case 'LOGIN_SUCCESS':
+      setToken(action.payload.id_token);
+      break;
+    case 'LOGOUT':
+      deleteToken();
+      break;
+    default:
+      break;
+  }
+  return next(action);
+};

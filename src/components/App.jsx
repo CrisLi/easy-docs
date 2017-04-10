@@ -7,17 +7,13 @@ import Protected from './protected/Protected';
 import Login from './public/Login';
 import './app.css';
 
-const App = ({ auth }) => (
+const App = ({ isAuthenticated }) => (
   <Router>
     <div>
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/" component={Protected} auth={auth} />
+      <PrivateRoute path="/" component={Protected} isAuthenticated={isAuthenticated} />
     </div>
   </Router>
 );
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(App);
+export default connect(state => (state.auth))(App);

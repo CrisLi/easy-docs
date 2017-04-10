@@ -1,15 +1,18 @@
 import { post } from './api';
+import config from '../lib/config';
+
+const { auth: { endpoint, client_id, connection, scope } } = config;
 
 export const login = (username, password) => {
   const body = {
     username,
     password,
-    client_id: 'P4oZ6O93FslFuOsFG2RoudyJdELIUwBf',
-    connection: 'Username-Password-Authentication',
-    scope: 'openid'
+    client_id,
+    connection,
+    scope
   };
   const options = {
-    endpoint: 'https://chris-li.auth0.com/oauth/ro',
+    endpoint,
     method: 'POST'
   };
   return post('LOGIN')(body, options);

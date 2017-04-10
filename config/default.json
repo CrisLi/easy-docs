@@ -1,6 +1,10 @@
 {
   "title": "My App",
   "auth": {
-    "localTokenKey": "x-app-token"
+    "localTokenKey": "x-app-token",
+    "endpoint": "https://chris-li.auth0.com/oauth/ro",
+    "client_id": "P4oZ6O93FslFuOsFG2RoudyJdELIUwBf",
+    "connection": "Username-Password-Authentication",
+    "scope": "openid"
   }
 }

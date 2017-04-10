@@ -14,7 +14,8 @@ export const login = (username, password) => (
         });
       } else {
         dispatch({
-          type: 'LOGIN_FAILURE'
+          type: 'LOGIN_FAILURE',
+          payload: { message: 'Invalid username or password!' }
         });
       }
     }, 1000);

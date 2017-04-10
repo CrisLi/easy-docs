@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Grid, Segment, Header, Form, Button, Message } from 'semantic-ui-react';
 import { auth } from '../../actions';
+
+const LoginForm = ({ onSubmit, isSubmitting, fields: { username, password }, error }) => (
+  <Grid centered verticalAlign="middle" className="login-grid">
+    <Grid.Column computer={5} mobile={12}>
+      <Segment stacked>
+        <Header textAlign="center" as="h2">App Login</Header>
+        <Form onSubmit={onSubmit} size="large" loading={isSubmitting}>
+          <Form.Input iconPosition="left" type="text" placeholder="username" {...username} />
+          <Form.Input iconPosition="left" type="password" placeholder="password" {...password} />
+          { error && <Message negative>{error.message}</Message> }
+          <Button disabled={isSubmitting} type="submit" fluid color="green">Login</Button>
+        </Form>
+      </Segment>
+    </Grid.Column>
+  </Grid>
+);
 
 class Login extends Component {
 
@@ -34,34 +51,31 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.isAuthenticated) {
+    const { isAuthenticated, isProcessing, error } = this.props;
+
+    if (isAuthenticated) {
       return (
         <Redirect to="/" />
       );
     }
 
+    const fields = {
+      username: {
+        name: 'username',
+        icon: 'user',
+        onChange: this.onChange,
+        value: this.state.value
+      },
+      password: {
+        name: 'password',
+        icon: 'lock',
+        onChange: this.onChange,
+        value: this.state.value
+      }
+    };
+
     return (
-      <div>
-        <form onSubmit={this.login}>
-          <input
-            name="username"
-            type="text"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.onChange}
-          />
-          <br />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.onChange}
-          />
-          <br />
-          <button type="submit">Login</button>
-        </form>
-      </div>
+      <LoginForm onSubmit={this.login} fields={fields} isSubmitting={isProcessing} error={error} />
     );
   }
 }

@@ -1,4 +1,12 @@
+html
+body {
+  background-color: #F8F8F8;
+}
+
 .pusher {
   padding-top: 3em!important;
-  background-color: #F8F8F8!important;
+}
+
+.login-grid {
+  height: 100%;
 }

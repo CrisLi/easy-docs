@@ -64,13 +64,15 @@ class Login extends Component {
         name: 'username',
         icon: 'user',
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
+        autoComplete: 'off'
       },
       password: {
         name: 'password',
         icon: 'lock',
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
+        autoComplete: 'off'
       }
     };
 

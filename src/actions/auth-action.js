@@ -1,31 +1,21 @@
-import { setToken, deleteToken } from '../lib/auth';
+import { post } from './api';
 
-export const login = (username, password) => (
-  (dispatch) => {
-    dispatch({
-      type: 'LOGIN_REQUEST'
-    });
-    setTimeout(() => {
-      if (username === 'admin' && password === 'admin') {
-        setToken('4713e3D');
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: { token: '4713e3D' }
-        });
-      } else {
-        dispatch({
-          type: 'LOGIN_FAILURE',
-          payload: { message: 'Invalid username or password!' }
-        });
-      }
-    }, 1000);
-  }
-);
-
-export const logout = () => {
-  deleteToken();
-  return {
-    type: 'LOGOUT',
-    payload: null
+export const login = (username, password) => {
+  const body = {
+    username,
+    password,
+    client_id: 'P4oZ6O93FslFuOsFG2RoudyJdELIUwBf',
+    connection: 'Username-Password-Authentication',
+    scope: 'openid'
   };
+  const options = {
+    endpoint: 'https://chris-li.auth0.com/oauth/ro',
+    method: 'POST'
+  };
+  return post('LOGIN')(body, options);
 };
+
+export const logout = () => ({
+  type: 'LOGOUT',
+  payload: null
+});

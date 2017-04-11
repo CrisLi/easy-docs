@@ -50,10 +50,7 @@ class Protected extends Component {
       <div>
         <Header toggleSidebar={this.toggleSidebar} logout={logout} />
         <Sidebar.Pushable>
-          <Sidebar as={Menu} inverted animation="push" width="thin" visible={show} icon vertical>
-            <Menu.Item>
-              <Icon name="content" />
-            </Menu.Item>
+          <Sidebar as={Menu} inverted animation="push" width="thin" visible={show} vertical>
             <Menu.Item as={NavLink} to="/" exact>Home</Menu.Item>
             <Menu.Item as={NavLink} to="/document">Document</Menu.Item>
             <Menu.Item as={NavLink} to="/about">About</Menu.Item>

@@ -3,8 +3,12 @@ body {
   background-color: #F8F8F8;
 }
 
+.sidebar.menu {
+  margin-top: 40px!important;
+}
+
 .pusher {
-  padding-top: 3em!important;
+  padding-top: 40px!important;
 }
 
 .login-grid {

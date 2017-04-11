@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, NavLink } from 'react-router-dom';
 import { Container, Menu, Icon, Sidebar, Segment, Dropdown } from 'semantic-ui-react';
 import Home from './Home';
+import Projects from './projects/Projects';
 import Document from './Document';
 import About from './About';
 import { auth } from '../../actions';
@@ -52,6 +53,7 @@ class Protected extends Component {
         <Sidebar.Pushable>
           <Sidebar as={Menu} inverted animation="push" width="thin" visible={show} vertical>
             <Menu.Item as={NavLink} to="/" exact>Home</Menu.Item>
+            <Menu.Item as={NavLink} to="/projects">Projects</Menu.Item>
             <Menu.Item as={NavLink} to="/document">Document</Menu.Item>
             <Menu.Item as={NavLink} to="/about">About</Menu.Item>
           </Sidebar>
@@ -71,6 +73,7 @@ const Main = () => (
   <div>
     <Container fluid>
       <Route exact path="/" component={Home} />
+      <Route path="/projects" component={Projects} />
       <Route path="/document" component={Document} />
       <Route path="/about" component={About} />
     </Container>

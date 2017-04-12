@@ -14,3 +14,7 @@ body {
 .login-grid {
   height: 100%;
 }
+
+.field.error small.helper {
+  color: #9F3A38 !important;
+}

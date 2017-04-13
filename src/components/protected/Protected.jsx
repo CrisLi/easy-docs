@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, NavLink } from 'react-router-dom';
-import { Container, Menu, Icon, Sidebar, Segment, Dropdown } from 'semantic-ui-react';
+import { Container, Grid, Menu, Icon, Sidebar, Segment, Dropdown } from 'semantic-ui-react';
 import Home from './Home';
 import Projects from './projects/Projects';
 import Document from './Document';
@@ -59,7 +59,7 @@ class Protected extends Component {
           </Sidebar>
           <Sidebar.Pusher>
             <Segment basic>
-              <Main />
+              <Main showSidebar={show} />
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -69,13 +69,17 @@ class Protected extends Component {
 
 }
 
-const Main = () => (
+const Main = ({ showSidebar }) => (
   <div>
     <Container fluid>
-      <Route exact path="/" component={Home} />
-      <Route path="/projects" component={Projects} />
-      <Route path="/document" component={Document} />
-      <Route path="/about" component={About} />
+      <Grid>
+        <Grid.Column computer={showSidebar ? 14 : 16} mobile={16}>
+          <Route exact path="/" component={Home} />
+          <Route path="/projects" component={Projects} />
+          <Route path="/document" component={Document} />
+          <Route path="/about" component={About} />
+        </Grid.Column>
+      </Grid>
     </Container>
   </div>
 );

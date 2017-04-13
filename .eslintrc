@@ -3,7 +3,9 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": [0],
-    "jsx-a11y/label-has-for": [0]
+    "jsx-a11y/label-has-for": [0],
+    "arrow-body-style": [1, "as-needed"],
+    "no-unused-vars": [1]
   },
   "env": {
     "browser": true

@@ -5,24 +5,17 @@ export default function(state = { list: [] }, action) {
         ...state,
         list: action.payload,
       };
-    case 'CREATE_PROJECT_REQUEST':
-      return {
-        ...state,
-        isProcessing: true
-      };
     case 'CREATE_PROJECT_SUCCESS':
       return {
         ...state,
-        list: [...state.list, action.payload],
-        isProcessing: false
+        list: [...state.list, action.payload]
       };
     case 'CREATE_PROJECT_FAILURE':
       return {
         ...state,
         error: {
           message: action.payload.response.message
-        },
-        isProcessing: false
+        }
       };
     default:
       return state;

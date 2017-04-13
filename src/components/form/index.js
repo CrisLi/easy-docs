@@ -1,28 +1,22 @@
 import React from 'react';
 import { Form as UiForm, Input as UiInput, TextArea as UiTextArea } from 'semantic-ui-react';
 
-export const Input = ({ meta, input, label, ...rest }) => {
-  const { touched, error } = meta;
-  const showError = touched && !!error;
-  return (
-    <Form.Field error={showError} {...rest}>
-      <label>{label}</label>
-      <UiInput {...input} />
-      <small className="helper">{showError && error}</small>
-    </Form.Field>
-  );
-};
+export { default as connectForm } from './connect-form';
+export { Form } from 'semantic-ui-react';
 
-export const TextArea = ({ meta, input, label, ...rest }) => {
-  const { touched, error } = meta;
-  const showError = touched && !!error;
-  return (
-    <Form.Field error={showError} {...rest}>
-      <label>{label}</label>
-      <UiTextArea {...input} />
-      <small className="helper">{showError && error}</small>
-    </Form.Field>
-  );
-};
+const withHelper = ({ meta, input, label, required, ...rest }) => (
+  (Component) => {
+    const { touched, error } = meta;
+    const showError = touched && !!error;
+    return (
+      <UiForm.Field error={showError} required={required}>
+        <label>{label}</label>
+        <Component {...input} {...rest} />
+        <small className="helper">{showError && error}</small>
+      </UiForm.Field>
+    );
+  }
+);
 
-export const Form = UiForm;
+export const Input = props => withHelper(props)(UiInput);
+export const TextArea = props => withHelper(props)(UiTextArea);

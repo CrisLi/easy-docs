@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const config = require('config');
 const webpackConfig = require('./webpack.config');
 const { appPath, appHtml, favicon, stylesPath } = require('./paths');
@@ -47,7 +48,8 @@ module.exports = Object.assign({}, webpackConfig, {
     new webpack.EnvironmentPlugin({ NODE_ENV: config.NODE_ENV }),
     new webpack.DefinePlugin({
       APP_CONFIG: JSON.stringify(config)
-    })
+    }),
+    new ProgressBarPlugin()
   ],
   performance: {
     hints: 'warning'

@@ -12,8 +12,7 @@ export const login = (username, password) => {
     scope
   };
   const options = {
-    endpoint,
-    method: 'POST'
+    endpoint
   };
   return post('LOGIN')(body, options);
 };

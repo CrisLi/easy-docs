@@ -1,10 +1,23 @@
 import { CALL_API } from 'redux-api-middleware';
+import qs from 'querystring';
 
-export const create = name => config => ({
+// if you need some query params, don't add them into the endpoint, use 'query' config
+const normalizeOptions = (options) => {
+  const { query, endpoint, ...rest } = options;
+  if (query && endpoint) {
+    return {
+      ...rest,
+      endpoint: `${endpoint.replace(/\?*/, '')}/?${qs.stringify({ ...query })}`
+    };
+  }
+  return options;
+};
+
+export const create = name => options => ({
   [CALL_API]: {
     headers: { 'Content-Type': 'application/json' },
     types: [`${name}_REQUEST`, `${name}_SUCCESS`, `${name}_FAILURE`],
-    ...config
+    ...normalizeOptions(options)
   }
 });
 

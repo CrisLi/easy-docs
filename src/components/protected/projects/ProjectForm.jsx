@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import { Input, TextArea } from '../../form';
 
 const validate = (values) => {
@@ -11,11 +11,12 @@ const validate = (values) => {
   return errors;
 };
 
-const ProjectForm = ({ handleSubmit, isSubmitting }) => (
-  <Form onSubmit={handleSubmit} loading={isSubmitting} noValidate>
+const ProjectForm = ({ handleSubmit, isProcessing, error }) => (
+  <Form onSubmit={handleSubmit} loading={isProcessing} noValidate>
+    { error && <Message negative>{error}</Message> }
     <Field name="name" label="Name" component={Input} required />
     <Field name="description" label="Description" component={TextArea} />
-    <Button disabled={isSubmitting} type="submit" color="green">Create</Button>
+    <Button disabled={isProcessing} type="submit" color="green">Create</Button>
   </Form>
 );
 

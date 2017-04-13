@@ -6,5 +6,11 @@
     "client_id": "P4oZ6O93FslFuOsFG2RoudyJdELIUwBf",
     "connection": "Username-Password-Authentication",
     "scope": "openid"
+  },
+  "api": {
+    "mlab": {
+      "url": "https://api.mlab.com/api/1/databases/easy-doc/collections",
+      "apiKey": "EhpBOdclXrepXAuPKpXeijpuT19p2peh"
+    }
   }
 }

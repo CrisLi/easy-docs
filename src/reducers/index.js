@@ -1,9 +1,3 @@
-import app from './app-reducer';
-import auth from './auth-reducer';
-import projects from './project-reducer';
-
-export default {
-  app,
-  auth,
-  projects
-};
+export { default as app } from './app-reducer';
+export { default as auth } from './auth-reducer';
+export { default as projects } from './project-reducer';

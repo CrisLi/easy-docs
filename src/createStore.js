@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
 import { reducer as formReducer } from 'redux-form';
 import { createLogger } from 'redux-logger';
+import { reducer as notificationsReducer } from 'reapop';
 import { authMiddleware } from './lib/auth';
-import reducers from './reducers';
+import * as reducers from './reducers';
 
 const reducer = combineReducers({
   ...reducers,
-  form: formReducer
+  form: formReducer,
+  notifications: notificationsReducer()
 });
 
 const middlewares = [thunk, apiMiddleware, authMiddleware];

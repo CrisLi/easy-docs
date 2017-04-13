@@ -18,6 +18,10 @@ class NewProject extends Component {
 
   onSubmitSuccess() {
     this.props.history.push('/projects');
+    this.props.actions.notify({
+      message: 'Project create successfully!',
+      status: 'success'
+    });
   }
 
   render() {
